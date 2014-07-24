@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD85311980A55C00A71228 /* TRLevelDB.m */; };
+		8ECD85361980A8FF00A71228 /* TRImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD85351980A8FF00A71228 /* TRImagePicker.m */; };
 		C6C686C7197F7C430042DAEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C6197F7C430042DAEF /* Foundation.framework */; };
 		C6C686C9197F7C430042DAEF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C8197F7C430042DAEF /* CoreGraphics.framework */; };
 		C6C686CB197F7C430042DAEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686CA197F7C430042DAEF /* UIKit.framework */; };
@@ -24,7 +26,6 @@
 		C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68705197F9DB90042DAEF /* TRMineTableViewController.m */; };
 		C6C6870A197FA3A20042DAEF /* TRPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68709197FA3A20042DAEF /* TRPhotoBrowserViewController.m */; };
 		C6C6870F197FBAC70042DAEF /* UIViewController+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */; };
-		C6C68716197FD32E0042DAEF /* TRImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68715197FD32E0042DAEF /* TRImagePicker.m */; };
 		C6C6871A197FDBA00042DAEF /* TRPhotoTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68719197FDBA00042DAEF /* TRPhotoTagViewController.m */; };
 		C6C6871E197FDF2A0042DAEF /* PhotoTag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C6871D197FDF2A0042DAEF /* PhotoTag.storyboard */; };
 		F37361F5CEB14ABE87846AD7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5D5A459E9E4F7EAD14C4A3 /* libPods.a */; };
@@ -41,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8ECD85301980A55C00A71228 /* TRLevelDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRLevelDB.h; sourceTree = "<group>"; };
+		8ECD85311980A55C00A71228 /* TRLevelDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRLevelDB.m; sourceTree = "<group>"; };
+		8ECD85341980A8FF00A71228 /* TRImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRImagePicker.h; sourceTree = "<group>"; };
+		8ECD85351980A8FF00A71228 /* TRImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRImagePicker.m; sourceTree = "<group>"; };
 		B80D4A2BF5F1432D91312A96 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C6C686C3197F7C430042DAEF /* TimeRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C686C6197F7C430042DAEF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,8 +72,6 @@
 		C6C68709197FA3A20042DAEF /* TRPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		C6C6870D197FBAC70042DAEF /* UIViewController+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Sugar.h"; sourceTree = "<group>"; };
 		C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Sugar.m"; sourceTree = "<group>"; };
-		C6C68714197FD32E0042DAEF /* TRImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRImagePicker.h; sourceTree = "<group>"; };
-		C6C68715197FD32E0042DAEF /* TRImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRImagePicker.m; sourceTree = "<group>"; };
 		C6C68718197FDBA00042DAEF /* TRPhotoTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoTagViewController.h; sourceTree = "<group>"; };
 		C6C68719197FDBA00042DAEF /* TRPhotoTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoTagViewController.m; sourceTree = "<group>"; };
 		C6C6871D197FDF2A0042DAEF /* PhotoTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoTag.storyboard; sourceTree = "<group>"; };
@@ -100,6 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8ECD852F1980A53800A71228 /* LevelDB */ = {
+			isa = PBXGroup;
+			children = (
+				8ECD85301980A55C00A71228 /* TRLevelDB.h */,
+				8ECD85311980A55C00A71228 /* TRLevelDB.m */,
+			);
+			path = LevelDB;
+			sourceTree = "<group>";
+		};
+		8ECD85331980A8FF00A71228 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				8ECD85341980A8FF00A71228 /* TRImagePicker.h */,
+				8ECD85351980A8FF00A71228 /* TRImagePicker.m */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
 		C6C686BA197F7C430042DAEF = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +205,7 @@
 				C6C686FF197F9D820042DAEF /* Mine */,
 				C6C68707197FA2220042DAEF /* PhotoBrowser */,
 				C6C68717197FD9130042DAEF /* PhotoTag */,
+				8ECD85331980A8FF00A71228 /* ImagePicker */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -232,7 +254,7 @@
 		C6C6870B197FBA3F0042DAEF /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				C6C68713197FD3200042DAEF /* ImagePicker */,
+				8ECD852F1980A53800A71228 /* LevelDB */,
 				C6C6870C197FBAA90042DAEF /* Sugar */,
 			);
 			path = Vendors;
@@ -245,15 +267,6 @@
 				C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */,
 			);
 			path = Sugar;
-			sourceTree = "<group>";
-		};
-		C6C68713197FD3200042DAEF /* ImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				C6C68714197FD32E0042DAEF /* TRImagePicker.h */,
-				C6C68715197FD32E0042DAEF /* TRImagePicker.m */,
-			);
-			path = ImagePicker;
 			sourceTree = "<group>";
 		};
 		C6C68717197FD9130042DAEF /* PhotoTag */ = {
@@ -402,10 +415,11 @@
 			files = (
 				C6C6871A197FDBA00042DAEF /* TRPhotoTagViewController.m in Sources */,
 				C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */,
-				C6C68716197FD32E0042DAEF /* TRImagePicker.m in Sources */,
 				C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */,
 				C6C686D3197F7C430042DAEF /* main.m in Sources */,
 				C6C6870A197FA3A20042DAEF /* TRPhotoBrowserViewController.m in Sources */,
+				8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */,
+				8ECD85361980A8FF00A71228 /* TRImagePicker.m in Sources */,
 				C6C68703197F9DA90042DAEF /* TRTimeTableViewController.m in Sources */,
 				C6C6870F197FBAC70042DAEF /* UIViewController+Sugar.m in Sources */,
 			);
