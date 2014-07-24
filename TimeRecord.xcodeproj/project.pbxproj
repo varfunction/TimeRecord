@@ -28,6 +28,8 @@
 		C6C6870F197FBAC70042DAEF /* UIViewController+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */; };
 		C6C6871A197FDBA00042DAEF /* TRPhotoTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68719197FDBA00042DAEF /* TRPhotoTagViewController.m */; };
 		C6C6871E197FDF2A0042DAEF /* PhotoTag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C6871D197FDF2A0042DAEF /* PhotoTag.storyboard */; };
+		C6C687221980AE3E0042DAEF /* TRPhotoPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C687211980AE3E0042DAEF /* TRPhotoPickerManager.m */; };
+		C6C687251980AE710042DAEF /* TRMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C687241980AE710042DAEF /* TRMineView.m */; };
 		F37361F5CEB14ABE87846AD7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5D5A459E9E4F7EAD14C4A3 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,10 @@
 		C6C68718197FDBA00042DAEF /* TRPhotoTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoTagViewController.h; sourceTree = "<group>"; };
 		C6C68719197FDBA00042DAEF /* TRPhotoTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoTagViewController.m; sourceTree = "<group>"; };
 		C6C6871D197FDF2A0042DAEF /* PhotoTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoTag.storyboard; sourceTree = "<group>"; };
+		C6C687201980AE3E0042DAEF /* TRPhotoPickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoPickerManager.h; sourceTree = "<group>"; };
+		C6C687211980AE3E0042DAEF /* TRPhotoPickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoPickerManager.m; sourceTree = "<group>"; };
+		C6C687231980AE710042DAEF /* TRMineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRMineView.h; sourceTree = "<group>"; };
+		C6C687241980AE710042DAEF /* TRMineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRMineView.m; sourceTree = "<group>"; };
 		DD5D5A459E9E4F7EAD14C4A3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -213,6 +219,7 @@
 		C6C686FC197F9CD70042DAEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C6C6871F1980AE200042DAEF /* PhotoPickerManager */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +227,8 @@
 		C6C686FD197F9CD70042DAEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C6C687231980AE710042DAEF /* TRMineView.h */,
+				C6C687241980AE710042DAEF /* TRMineView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -277,6 +286,15 @@
 				C6C6871D197FDF2A0042DAEF /* PhotoTag.storyboard */,
 			);
 			path = PhotoTag;
+			sourceTree = "<group>";
+		};
+		C6C6871F1980AE200042DAEF /* PhotoPickerManager */ = {
+			isa = PBXGroup;
+			children = (
+				C6C687201980AE3E0042DAEF /* TRPhotoPickerManager.h */,
+				C6C687211980AE3E0042DAEF /* TRPhotoPickerManager.m */,
+			);
+			path = PhotoPickerManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,9 +433,11 @@
 			files = (
 				C6C6871A197FDBA00042DAEF /* TRPhotoTagViewController.m in Sources */,
 				C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */,
+				C6C687221980AE3E0042DAEF /* TRPhotoPickerManager.m in Sources */,
 				C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */,
 				C6C686D3197F7C430042DAEF /* main.m in Sources */,
 				C6C6870A197FA3A20042DAEF /* TRPhotoBrowserViewController.m in Sources */,
+				C6C687251980AE710042DAEF /* TRMineView.m in Sources */,
 				8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */,
 				8ECD85361980A8FF00A71228 /* TRImagePicker.m in Sources */,
 				C6C68703197F9DA90042DAEF /* TRTimeTableViewController.m in Sources */,
