@@ -23,7 +23,8 @@ DerivedData
 # you should judge for yourself, the pros and cons are mentioned at:
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 # 我还是要track一下，因为万一pod不能用呢。。
-# Pods/
+Pods/
+Podfile.lock
 
 # osx noise
 .DS_Store
