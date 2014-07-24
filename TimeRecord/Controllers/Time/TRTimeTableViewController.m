@@ -7,18 +7,51 @@
 //
 
 #import "TRTimeTableViewController.h"
-#import "TRImagePicker.h"
+#import "TRPhotoPicker.h"
 #import "TRPhotoTagViewController.h"
+#import "TRTimeCreateTableViewController.h"
+#import "TRTimeManager.h"
+#import "TRPhotoBrowserDelegate.h"
+#import "TRPhotoPickerDelegate.h"
 
 @interface TRTimeTableCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *timeView;
+@property (weak, nonatomic) IBOutlet UILabel *timeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *timeDesc;
+
+@property (strong, nonatomic) TRTimeModel *model;
 
 @end
 
 @implementation TRTimeTableCell
 
+- (void)setContent:(TRTimeModel *)model
+{
+    self.timeView.layer.borderWidth = 1.0;
+    self.timeView.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.timeView.layer.cornerRadius = 10;
+    
+    self.timeView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.timeView.layer.shadowOpacity = 0.8;
+    self.timeView.layer.shadowRadius = 10.0;
+    self.timeView.layer.shadowOffset = CGSizeMake(0, 1);
+    
+    self.model = model;
+    self.timeTitle.text = model.timeHomePhoto.photoTitle;
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+//    [super setHighlighted:highlighted animated:animated];
+}
+
 @end
 
 @interface TRTimeTableViewController ()
+
+@property (strong, nonatomic) TRPhotoBrowserDelegate *photoBrowserDelegate;
+@property (strong, nonatomic) TRPhotoPickerDelegate *photoPickerDelegate;
+@property (strong, nonatomic) TRTimeModel *currentSelectedTime;
 
 @end
 
@@ -37,7 +70,46 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_NAME_CREATE_TIME_COMPLETE
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshView:)
+                                                 name:NOTIFICATION_NAME_CREATE_TIME_COMPLETE
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NOTIFICATION_NAME_PICK_PHOTO_COMPLETE
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(openPhotoTagViewController:)
+                                                 name:NOTIFICATION_NAME_PICK_PHOTO_COMPLETE
+                                               object:nil];
+    
+    self.photoBrowserDelegate = [[TRPhotoBrowserDelegate alloc] init];
+    self.photoPickerDelegate = [[TRPhotoPickerDelegate alloc] init];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:(UIBarButtonItemStylePlain) target:self action:@selector(didPressedRightBarButton)];
+}
+
+- (void)refreshView:(NSNotification *)sender
+{
+    [self.tableView reloadData];
+}
+
+- (void)openPhotoTagViewController:(NSNotification *)sender
+{
+    UIImage *selectedImage = (UIImage *)[sender.userInfo objectForKey:NOTIFICATION_USERINFO_PICK_PHOTO];
+    NSURL *url = (NSURL *)[sender.userInfo objectForKey:NOTIFICATION_USERINFO_PICK_PHOTO_URL];
+    NSArray *location = (NSArray *)[sender.userInfo objectForKey:NOTIFICATION_USERINFO_PICK_PHOTO_LOCATION];
+    TRPhotoTagViewController *tag = [TRPhotoTagViewController instantiate];
+    tag.timeModel = self.currentSelectedTime;
+    tag.selectedImage = selectedImage;
+    tag.selectedImageURL = url;
+    tag.locationArray = location;
+    [self.navigationController pushViewController:tag animated:YES];
 }
 
 - (void)didPressedRightBarButton
@@ -46,11 +118,10 @@
 //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 //    picker.delegate = self;
 //    [self presentViewController:picker animated:YES completion:NULL];
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.delegate = self;
-    TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
-    [systemAlbumPicker presentInViewController:self.navigationController];
+    
+    TRTimeCreateTableViewController *vc = [TRTimeCreateTableViewController instantiate];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,39 +131,50 @@
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [TRTimeManager sharedInstance].allTime.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
+    TRTimeTableCell *cell = (TRTimeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
+    TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
     
-    // Configure the cell...
+    [cell setContent:timeModel];
     
     return cell;
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"info = %@", info);
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    TRPhotoTagViewController *tag = [TRPhotoTagViewController instantiate];
-    tag.image = image;
-    [self.navigationController pushViewController:tag animated:YES];
+    return 120;
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
+    self.currentSelectedTime = timeModel;
+    
+    if (timeModel.timePhotos.count > 0) {
+        // 浏览照片
+        self.photoBrowserDelegate.photos = [NSMutableArray arrayWithCapacity:timeModel.timePhotos.count];
+        for (TRTimePhotoModel *photo in timeModel.timePhotos) {
+            [self.photoBrowserDelegate.photos addObject:[MWPhoto photoWithURL:photo.photoURL]];
+        }
+        
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self.photoBrowserDelegate];
+        
+        [self.navigationController pushViewController:browser animated:YES];
+    } else {
+        // 新增照片
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.delegate = self.photoPickerDelegate;
+        TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
+        [systemAlbumPicker presentInViewController:self.navigationController];
+    }
 }
 
 @end

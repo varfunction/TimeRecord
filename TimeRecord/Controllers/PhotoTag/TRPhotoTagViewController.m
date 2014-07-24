@@ -7,10 +7,14 @@
 //
 
 #import "TRPhotoTagViewController.h"
+#import "TRTimePhotoModel.h"
+@import CoreLocation;
 
 @interface TRPhotoTagViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @end
 
@@ -31,7 +35,23 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.imageView.image = self.image;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:(UIBarButtonItemStyleBordered) target:self action:@selector(savePhotoTag)];
+    self.imageView.image = self.selectedImage;
+    
+    self.locationLabel.text = [(CLPlacemark *)[self.locationArray firstObject] subLocality];
+    NSString *str = [self.locationArray description];
+}
+
+- (void)savePhotoTag
+{
+    TRTimePhotoModel *photo = [[TRTimePhotoModel alloc] init];
+    photo.photoTitle = @"123";
+    photo.photoDesc = self.textView.text;
+    photo.photoURL = self.selectedImageURL;
+    
+    [self.timeModel.timePhotos addObject:photo];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

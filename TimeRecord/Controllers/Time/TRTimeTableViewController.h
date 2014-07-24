@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TRTimeTableViewController : UITableViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface TRTimeTableViewController : UITableViewController
 
 @end

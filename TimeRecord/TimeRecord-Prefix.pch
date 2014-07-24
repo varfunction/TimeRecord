@@ -16,5 +16,6 @@
 
 // Syntactic sugar
     #import "UIViewController+Sugar.h"
+    @import CoreLocation;
 
 #endif

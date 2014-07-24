@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TRTimeModel.h"
+#import "TRTimePhotoModel.h"
 
 @interface TRPhotoPickerManager : NSObject
+
+- (void)saveSystemAlbumImage:(NSURL *)url;
 
 @end

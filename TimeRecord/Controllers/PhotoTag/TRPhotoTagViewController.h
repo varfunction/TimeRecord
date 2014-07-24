@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TRTimeModel.h"
 
 @interface TRPhotoTagViewController : UITableViewController
 
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) TRTimeModel *timeModel;
+@property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic, strong) NSURL *selectedImageURL;
+@property (nonatomic, strong) NSArray *locationArray;
+
 
 @end
