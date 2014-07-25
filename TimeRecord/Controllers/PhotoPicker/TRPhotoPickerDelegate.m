@@ -7,8 +7,8 @@
 //
 
 #import "TRPhotoPickerDelegate.h"
-@import AssetsLibrary;
-@import CoreLocation;
+//@import AssetsLibrary;
+//@import CoreLocation;
 
 @implementation TRPhotoPickerDelegate
 

@@ -11,6 +11,7 @@
 
 @interface TRPhotoBrowserDelegate : NSObject <MWPhotoBrowserDelegate>
 
+// MWPhoto
 @property (strong, nonatomic) NSMutableArray *photos;
 
 @end

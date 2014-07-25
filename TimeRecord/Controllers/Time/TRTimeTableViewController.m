@@ -9,10 +9,11 @@
 #import "TRTimeTableViewController.h"
 #import "TRPhotoPicker.h"
 #import "TRPhotoTagViewController.h"
-#import "TRTimeCreateTableViewController.h"
+#import "TRTimeEditViewController.h"
 #import "TRTimeManager.h"
 #import "TRPhotoBrowserDelegate.h"
 #import "TRPhotoPickerDelegate.h"
+#import "TRPhotoPickerManager.h"
 
 @interface TRTimeTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -88,6 +89,8 @@
                                                  name:NOTIFICATION_NAME_PICK_PHOTO_COMPLETE
                                                object:nil];
     
+    [[TRPhotoPickerManager sharedInstance] loadSystemAlbumPhoto];
+    
     self.photoBrowserDelegate = [[TRPhotoBrowserDelegate alloc] init];
     self.photoPickerDelegate = [[TRPhotoPickerDelegate alloc] init];
     
@@ -114,14 +117,7 @@
 
 - (void)didPressedRightBarButton
 {
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    picker.delegate = self;
-//    [self presentViewController:picker animated:YES completion:NULL];
-    
-    TRTimeCreateTableViewController *vc = [TRTimeCreateTableViewController instantiate];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:YES completion:NULL];
+    [[TRTimeManager sharedInstance] createEmptyTime];
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,7 +157,7 @@
         // 浏览照片
         self.photoBrowserDelegate.photos = [NSMutableArray arrayWithCapacity:timeModel.timePhotos.count];
         for (TRTimePhotoModel *photo in timeModel.timePhotos) {
-            [self.photoBrowserDelegate.photos addObject:[MWPhoto photoWithURL:photo.photoURL]];
+            [self.photoBrowserDelegate.photos addObject:[MWPhoto photoWithURL:photo.originPhotoURL]];
         }
         
         MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self.photoBrowserDelegate];
@@ -169,11 +165,13 @@
         [self.navigationController pushViewController:browser animated:YES];
     } else {
         // 新增照片
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        picker.delegate = self.photoPickerDelegate;
-        TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
-        [systemAlbumPicker presentInViewController:self.navigationController];
+//        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//        picker.delegate = self.photoPickerDelegate;
+//        TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
+//        [systemAlbumPicker presentInViewController:self.navigationController];
+        TRTimeEditViewController *vc = [TRTimeEditViewController instantiate];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

@@ -33,7 +33,7 @@
     timeModel.timeHomePhoto = homePhoto;
     timeModel.timePhotos = [NSMutableArray array];
     
-    [self.allTime addObject:timeModel];
+    [self.allTime insertObject:timeModel atIndex:0];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NAME_CREATE_TIME_COMPLETE
                                                         object:self

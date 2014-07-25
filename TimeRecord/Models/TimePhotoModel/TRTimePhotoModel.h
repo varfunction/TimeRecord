@@ -12,9 +12,14 @@
 
 @property (nonatomic, copy) NSString *photoTitle;
 @property (nonatomic, copy) NSString *photoDesc;
-@property (nonatomic, strong) NSURL *photoURL;
+@property (nonatomic, strong) NSURL *originPhotoURL;
+@property (nonatomic, strong) UIImage *thumbPhoto;
 
 // NSString
 @property (nonatomic, strong) NSArray *photoTag;
+
+@property (nonatomic, copy) CLLocation *photoLocation;
+
+@property (nonatomic, strong) NSDate *photoDate;
 
 @end

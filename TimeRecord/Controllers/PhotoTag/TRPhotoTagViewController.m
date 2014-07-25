@@ -47,7 +47,7 @@
     TRTimePhotoModel *photo = [[TRTimePhotoModel alloc] init];
     photo.photoTitle = @"123";
     photo.photoDesc = self.textView.text;
-    photo.photoURL = self.selectedImageURL;
+    photo.originPhotoURL = self.selectedImageURL;
     
     [self.timeModel.timePhotos addObject:photo];
     

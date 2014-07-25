@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "TRTimeModel.h"
 #import "TRTimePhotoModel.h"
+#import "TRPhotoPickerModel.h"
+
+static NSString *NOTIFICATION_NAME_LOAD_SYSTEM_PHOTO_COMPLETE = @"NOTIFICATION_NAME_LOAD_SYSTEM_PHOTO_COMPLETE";
 
 @interface TRPhotoPickerManager : NSObject
 
-- (void)saveSystemAlbumImage:(NSURL *)url;
+// TRPhotoPickerModel
+@property (nonatomic, strong) NSMutableArray *systemPhotos;
+
++ (instancetype)sharedInstance;
+
+- (void)loadSystemAlbumPhoto;
 
 @end
