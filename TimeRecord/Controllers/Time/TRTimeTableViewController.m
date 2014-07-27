@@ -171,6 +171,7 @@
 //        TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
 //        [systemAlbumPicker presentInViewController:self.navigationController];
         TRTimeEditTableViewController *vc = [TRTimeEditTableViewController instantiate];
+        vc.timeID = timeModel.timeID;
         vc.timeTitle = timeModel.timeHomePhoto.photoTitle;
         vc.timeDesc = timeModel.timeHomePhoto.photoDesc;
         vc.timeTags = [NSMutableArray arrayWithArray:timeModel.timeHomePhoto.photoTag];

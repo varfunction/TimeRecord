@@ -42,4 +42,21 @@
     return timeModel;
 }
 
+- (void)saveTimeForTimeID:(NSString *)timeID photos:(NSMutableArray *)photosArray;
+{
+    TRTimeModel *time = [self timeForTimeID:timeID];
+    time.timePhotos = [NSMutableArray arrayWithArray:photosArray];
+}
+
+- (TRTimeModel *)timeForTimeID:(NSString *)timeID
+{
+    for (int i = 0;i < self.allTime.count;i++) {
+        TRTimeModel *model = self.allTime[i];
+        if ([model.timeID isEqualToString:timeID]) {
+            return model;
+        }
+    }
+    return nil;
+}
+
 @end

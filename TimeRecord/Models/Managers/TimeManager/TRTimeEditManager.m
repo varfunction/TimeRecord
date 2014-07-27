@@ -23,4 +23,9 @@
     return instance;
 }
 
+- (void)createEditPhotos:(NSMutableArray *)editArray
+{
+    self.editPhotos = [NSMutableArray arrayWithArray:editArray];
+}
+
 @end

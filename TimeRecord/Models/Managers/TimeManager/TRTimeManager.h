@@ -21,4 +21,6 @@ static NSString *NOTIFICATION_NAME_CREATE_TIME_COMPLETE = @"NOTIFICATION_NAME_CR
 
 - (TRTimeModel *)createEmptyTime;
 
+- (void)saveTimeForTimeID:(NSString *)timeID photos:(NSMutableArray *)photosArray;
+
 @end

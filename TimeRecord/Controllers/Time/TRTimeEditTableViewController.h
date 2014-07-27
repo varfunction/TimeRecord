@@ -10,6 +10,7 @@
 #import <MWPhotoBrowser.h>
 
 @interface TRTimeEditTableViewController : UITableViewController <UICollectionViewDelegate, UICollectionViewDataSource, MWPhotoBrowserDelegate>
+@property (nonatomic, copy) NSString *timeID;
 
 @property (nonatomic, strong) NSURL *timeImage;
 @property (nonatomic, copy) NSString *timeTitle;

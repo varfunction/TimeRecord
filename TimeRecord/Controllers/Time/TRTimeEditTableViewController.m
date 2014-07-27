@@ -10,6 +10,7 @@
 #import "TRTimeEditManager.h"
 #import "TRPhotoPickerManager.h"
 #import "TRPhotoEditTableViewController.h"
+#import "TRTimeManager.h"
 
 @interface TRTimeEditCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *thumbImageView;
@@ -49,8 +50,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"save" style:(UIBarButtonItemStyleBordered) target:self action:@selector(saveEditResult)];
+    
     self.selectedModels = [NSMutableArray array];
     
+    NSMutableArray *temp = [NSMutableArray array];
     for (TRPhotoPickerModel *model in self.selectedModels) {
         TRTimePhotoModel *timePhoto = [[TRTimePhotoModel alloc] init];
         timePhoto.thumbPhoto = model.thumbPhoto.image;
@@ -58,12 +62,19 @@
         timePhoto.photoLocation = model.location;
         timePhoto.photoDate = model.date;
         
-        [[TRTimeEditManager sharedInstance].editPhotos addObject:timePhoto];
+        [temp addObject:timePhoto];
     }
+    [[TRTimeEditManager sharedInstance] createEditPhotos:temp];
     
     self.timeTitleView.text = self.timeTitle;
     self.timeDescView.text = self.timeDesc;
     self.timeTagView.text = [self.timeTags firstObject];
+}
+
+- (void)saveEditResult
+{
+    [[TRTimeManager sharedInstance] saveTimeForTimeID:self.timeID photos:[TRTimeEditManager sharedInstance].editPhotos];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

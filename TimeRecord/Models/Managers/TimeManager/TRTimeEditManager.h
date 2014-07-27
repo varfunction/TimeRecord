@@ -15,4 +15,6 @@
 
 + (instancetype)sharedInstance;
 
+- (void)createEditPhotos:(NSMutableArray *)editArray;
+
 @end
