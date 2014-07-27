@@ -38,6 +38,7 @@
         @strongify(self);
         self.library = [[ALAssetsLibrary alloc] init];
         //Load Photo
+        NSMutableArray *temp = [NSMutableArray array];
         [self.library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
             NSLog(@"group = %@, stop = %d", group, *stop);
             if (group) {
@@ -54,14 +55,14 @@
                             model.originPhoto = [MWPhoto photoWithURL:url];
                             model.location = location;
                             model.date = date;
-                            model.selected = NO;
-                            [self.systemPhotos addObject:model];
+                            [temp addObject:model];
 //                            [self.systemPhotos addObject:url];
                         }
                     }
                 }];
             } else {
                 *stop = YES;
+                self.systemPhotos = [NSMutableArray arrayWithArray:temp];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NAME_LOAD_SYSTEM_PHOTO_COMPLETE object:self userInfo:nil];                    
                 });

@@ -18,6 +18,4 @@
 
 @property (nonatomic, strong) NSDate *date;
 
-@property (nonatomic, assign) BOOL selected;
-
 @end

@@ -22,8 +22,6 @@
 
 @interface TRTimeEditTableViewController ()
 
-// TRPhotoPickerModel
-@property (nonatomic, strong) NSMutableArray *selectedModel;
 @property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
 @property (weak, nonatomic) IBOutlet UITextField *timeTitleView;
 @property (weak, nonatomic) IBOutlet UITextView *timeDescView;
@@ -49,8 +47,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.selectedModel = [NSMutableArray array];
     // Do any additional setup after loading the view.
+    
+    self.selectedModels = [NSMutableArray array];
+    
+    for (TRPhotoPickerModel *model in self.selectedModels) {
+        TRTimePhotoModel *timePhoto = [[TRTimePhotoModel alloc] init];
+        timePhoto.thumbPhoto = model.thumbPhoto.image;
+        timePhoto.originPhotoURL = model.originPhoto.photoURL;
+        timePhoto.photoLocation = model.location;
+        timePhoto.photoDate = model.date;
+        
+        [[TRTimeEditManager sharedInstance].editPhotos addObject:timePhoto];
+    }
     
     self.timeTitleView.text = self.timeTitle;
     self.timeDescView.text = self.timeDesc;
@@ -62,11 +71,6 @@
     [self.collectionView reloadData];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [[TRTimeEditManager sharedInstance].editPhotos removeAllObjects];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -75,7 +79,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [TRTimeEditManager sharedInstance].editPhotos.count + 1;
+    return self.selectedModels.count + 1;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -133,14 +137,29 @@
 }
 
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
-    TRPhotoPickerModel *model = [[TRPhotoPickerManager sharedInstance].systemPhotos objectAtIndex:index];
-    return model.selected;
+    NSMutableArray *systemPhotos = [TRPhotoPickerManager sharedInstance].systemPhotos;
+    TRPhotoPickerModel *model = [systemPhotos objectAtIndex:index];
+    if ([self isSelectedURL:model.originPhoto.photoURL]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)isSelectedURL:(NSURL *)url
+{
+    for (TRPhotoPickerModel *model in self.selectedModels) {
+        NSString *modelUrl = [model.originPhoto.photoURL absoluteString];
+        if ([modelUrl isEqualToString:[url absoluteString]]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
     TRPhotoPickerModel *model = [[TRPhotoPickerManager sharedInstance].systemPhotos objectAtIndex:index];
-    model.selected = selected;
-    [self.selectedModel addObject:model];
+    [self.selectedModels addObject:model];
     
     TRTimePhotoModel *timePhoto = [[TRTimePhotoModel alloc] init];
     timePhoto.thumbPhoto = model.thumbPhoto.image;

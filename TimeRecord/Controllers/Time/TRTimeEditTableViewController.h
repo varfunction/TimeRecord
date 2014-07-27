@@ -18,4 +18,7 @@
 // NSString
 @property (nonatomic, copy) NSMutableArray *timeTags;
 
+// TRPhotoPickerModel
+@property (nonatomic, strong) NSMutableArray *selectedModels;
+
 @end
