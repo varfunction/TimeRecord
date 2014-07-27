@@ -9,7 +9,7 @@
 #import "TRTimeTableViewController.h"
 #import "TRPhotoPicker.h"
 #import "TRPhotoTagViewController.h"
-#import "TRTimeEditViewController.h"
+#import "TRTimeEditTableViewController.h"
 #import "TRTimeManager.h"
 #import "TRPhotoBrowserDelegate.h"
 #import "TRPhotoPickerDelegate.h"
@@ -170,7 +170,10 @@
 //        picker.delegate = self.photoPickerDelegate;
 //        TRSystemAlbumPicker *systemAlbumPicker = [TRSystemAlbumPicker pickerWithImagePickerController:picker];
 //        [systemAlbumPicker presentInViewController:self.navigationController];
-        TRTimeEditViewController *vc = [TRTimeEditViewController instantiate];
+        TRTimeEditTableViewController *vc = [TRTimeEditTableViewController instantiate];
+        vc.timeTitle = timeModel.timeHomePhoto.photoTitle;
+        vc.timeDesc = timeModel.timeHomePhoto.photoDesc;
+        vc.timeTags = [NSMutableArray arrayWithArray:timeModel.timeHomePhoto.photoTag];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

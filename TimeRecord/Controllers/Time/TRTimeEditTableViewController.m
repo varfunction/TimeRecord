@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 ocean tang. All rights reserved.
 //
 
-#import "TRTimeEditViewController.h"
+#import "TRTimeEditTableViewController.h"
 #import "TRTimeEditManager.h"
 #import "TRPhotoPickerManager.h"
+#import "TRPhotoEditTableViewController.h"
 
 @interface TRTimeEditCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *thumbImageView;
@@ -19,19 +20,24 @@
 
 @end
 
-@interface TRTimeEditViewController ()
+@interface TRTimeEditTableViewController ()
 
 // TRPhotoPickerModel
 @property (nonatomic, strong) NSMutableArray *selectedModel;
+@property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
+@property (weak, nonatomic) IBOutlet UITextField *timeTitleView;
+@property (weak, nonatomic) IBOutlet UITextView *timeDescView;
+@property (weak, nonatomic) IBOutlet UILabel *timeTagView;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
-@implementation TRTimeEditViewController 
+@implementation TRTimeEditTableViewController 
 
 + (instancetype)instantiate
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Time" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"SBID_TRTimeEditViewController"];
+    return [storyboard instantiateViewControllerWithIdentifier:@"SBID_TRTimeEditTableViewController"];
 }
 
 - (void)awakeFromNib
@@ -45,6 +51,10 @@
     [super viewDidLoad];
     self.selectedModel = [NSMutableArray array];
     // Do any additional setup after loading the view.
+    
+    self.timeTitleView.text = self.timeTitle;
+    self.timeDescView.text = self.timeDesc;
+    self.timeTagView.text = [self.timeTags firstObject];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -93,7 +103,8 @@
         
         [self.navigationController pushViewController:browser animated:YES];
     } else {
-        
+        TRPhotoEditTableViewController *vc = [TRPhotoEditTableViewController instantiate];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
