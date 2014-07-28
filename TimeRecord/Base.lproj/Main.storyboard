@@ -24,7 +24,7 @@
         <scene sceneID="Uqu-N0-Ics">
             <objects>
                 <tableViewController id="iTV-fE-YF6" userLabel="时光" customClass="TRTimeTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="H4P-sc-LUe">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="H4P-sc-LUe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.51764705879999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,6 +97,14 @@
                                     <outlet property="timeTitle" destination="0Ep-jH-m1D" id="ojV-Gw-fVz"/>
                                     <outlet property="timeView" destination="JYb-kz-zto" id="vvt-7c-jKm"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RUID_TRTimeTagTableCell" rowHeight="312" id="Cvl-fq-EkJ" customClass="TRTimeTagTableCell">
+                                <rect key="frame" x="0.0" y="206" width="320" height="312"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cvl-fq-EkJ" id="nTf-CE-Sby">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="312"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>

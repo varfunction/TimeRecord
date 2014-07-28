@@ -14,6 +14,42 @@
 #import "TRPhotoBrowserDelegate.h"
 #import "TRPhotoPickerDelegate.h"
 #import "TRPhotoPickerManager.h"
+#import "DWTagList.h"
+#import "TRTimeTagListView.h"
+
+@interface TRTimeTagTableCell : UITableViewCell
+@end
+
+@implementation TRTimeTagTableCell
+
+- (void)setContent:(TRTimeModel *)model
+{
+//    // Initalise and set the frame of the tag list
+//    DWTagList *tagList = [[DWTagList alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+//    
+//    tagList.showTagMenu = YES;
+//    tagList.font = [UIFont systemFontOfSize:18];
+//    tagList.labelMargin = 20;
+//    tagList.horizontalPadding = 20;
+//    tagList.verticalPadding = 20;
+//    
+//    // Add the items to the array
+//    NSArray *array = [[NSArray alloc] initWithObjects:@"Foo", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", @"Tag Label 1", @"Tag Label 2", @"Tag Label 3", @"Tag Label 4", @"Tag Label 5", nil];
+//    [tagList setTags:array];
+    
+    TRTimeTagListView *tagList = [[TRTimeTagListView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 100; i++) {
+        TRTimeTagView *view = [[TRTimeTagView alloc] init];
+        [array addObject:view];
+    }
+    [tagList setTimeTags:array];
+    
+    // Add the taglist to your UIView
+    [self.contentView addSubview:tagList];
+}
+
+@end
 
 @interface TRTimeTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *timeView;
@@ -95,6 +131,8 @@
     self.photoPickerDelegate = [[TRPhotoPickerDelegate alloc] init];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:(UIBarButtonItemStylePlain) target:self action:@selector(didPressedRightBarButton)];
+    
+//    [self.tableView setPagingEnabled:YES];
 }
 
 - (void)refreshView:(NSNotification *)sender
@@ -134,7 +172,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TRTimeTableCell *cell = (TRTimeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
+//    TRTimeTableCell *cell = (TRTimeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
+//    TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
+//    
+//    [cell setContent:timeModel];
+    
+    TRTimeTagTableCell *cell = (TRTimeTagTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTagTableCell" forIndexPath:indexPath];
     TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
     
     [cell setContent:timeModel];
@@ -144,7 +187,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    
+    return tableView.frame.size.height - 49 - 44 - 20;//[self.tabBarController tabBar].frame.size.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

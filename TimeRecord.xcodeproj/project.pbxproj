@@ -16,6 +16,10 @@
 		8E377F411985224B0024A648 /* Photo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E377F401985224B0024A648 /* Photo.storyboard */; };
 		8E377F45198539290024A648 /* TRPhotoPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E377F44198539290024A648 /* TRPhotoPickerManager.m */; };
 		8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD85311980A55C00A71228 /* TRLevelDB.m */; };
+		C6916B111985FB150025ACE9 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B101985FB150025ACE9 /* DWTagList.m */; };
+		C6916B14198613C80025ACE9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6916B121985FB690025ACE9 /* QuartzCore.framework */; };
+		C6916B1E19862D970025ACE9 /* UIColor+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */; };
+		C6916B221986387F0025ACE9 /* TRTimeTagListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B211986387F0025ACE9 /* TRTimeTagListView.m */; };
 		C6C686C7197F7C430042DAEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C6197F7C430042DAEF /* Foundation.framework */; };
 		C6C686C9197F7C430042DAEF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C8197F7C430042DAEF /* CoreGraphics.framework */; };
 		C6C686CB197F7C430042DAEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686CA197F7C430042DAEF /* UIKit.framework */; };
@@ -32,7 +36,6 @@
 		C6C68703197F9DA90042DAEF /* TRTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68702197F9DA90042DAEF /* TRTimeTableViewController.m */; };
 		C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68705197F9DB90042DAEF /* TRMineTableViewController.m */; };
 		C6C6870F197FBAC70042DAEF /* UIViewController+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */; };
-		C6C687251980AE710042DAEF /* TRMineView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C687241980AE710042DAEF /* TRMineView.m */; };
 		C6C687291980B2770042DAEF /* TRTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C687281980B2770042DAEF /* TRTimeModel.m */; };
 		C6C6872D1980B45C0042DAEF /* TRTimePhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C6872C1980B45C0042DAEF /* TRTimePhotoModel.m */; };
 		C6C687321980B7010042DAEF /* Time.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C687311980B7010042DAEF /* Time.storyboard */; };
@@ -71,6 +74,14 @@
 		8ECD85301980A55C00A71228 /* TRLevelDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRLevelDB.h; sourceTree = "<group>"; };
 		8ECD85311980A55C00A71228 /* TRLevelDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRLevelDB.m; sourceTree = "<group>"; };
 		B80D4A2BF5F1432D91312A96 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C6916B0F1985FB150025ACE9 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
+		C6916B101985FB150025ACE9 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
+		C6916B121985FB690025ACE9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C6916B1B19862AC00025ACE9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C6916B1C19862D970025ACE9 /* UIColor+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Sugar.h"; sourceTree = "<group>"; };
+		C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Sugar.m"; sourceTree = "<group>"; };
+		C6916B201986387F0025ACE9 /* TRTimeTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimeTagListView.h; sourceTree = "<group>"; };
+		C6916B211986387F0025ACE9 /* TRTimeTagListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTimeTagListView.m; sourceTree = "<group>"; };
 		C6C686C3197F7C430042DAEF /* TimeRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C686C6197F7C430042DAEF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6C686C8197F7C430042DAEF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,8 +105,6 @@
 		C6C68705197F9DB90042DAEF /* TRMineTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRMineTableViewController.m; sourceTree = "<group>"; };
 		C6C6870D197FBAC70042DAEF /* UIViewController+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Sugar.h"; sourceTree = "<group>"; };
 		C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Sugar.m"; sourceTree = "<group>"; };
-		C6C687231980AE710042DAEF /* TRMineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRMineView.h; sourceTree = "<group>"; };
-		C6C687241980AE710042DAEF /* TRMineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRMineView.m; sourceTree = "<group>"; };
 		C6C687271980B2770042DAEF /* TRTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimeModel.h; sourceTree = "<group>"; };
 		C6C687281980B2770042DAEF /* TRTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTimeModel.m; sourceTree = "<group>"; };
 		C6C6872B1980B45C0042DAEF /* TRTimePhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimePhotoModel.h; sourceTree = "<group>"; };
@@ -117,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6916B14198613C80025ACE9 /* QuartzCore.framework in Frameworks */,
 				C6C686C9197F7C430042DAEF /* CoreGraphics.framework in Frameworks */,
 				C6C686CB197F7C430042DAEF /* UIKit.framework in Frameworks */,
 				C6C686C7197F7C430042DAEF /* Foundation.framework in Frameworks */,
@@ -206,6 +216,24 @@
 			path = LevelDB;
 			sourceTree = "<group>";
 		};
+		C6916B0E1985FAEE0025ACE9 /* DWTagList */ = {
+			isa = PBXGroup;
+			children = (
+				C6916B0F1985FB150025ACE9 /* DWTagList.h */,
+				C6916B101985FB150025ACE9 /* DWTagList.m */,
+			);
+			path = DWTagList;
+			sourceTree = "<group>";
+		};
+		C6916B1F1986384B0025ACE9 /* TimeTagView */ = {
+			isa = PBXGroup;
+			children = (
+				C6916B201986387F0025ACE9 /* TRTimeTagListView.h */,
+				C6916B211986387F0025ACE9 /* TRTimeTagListView.m */,
+			);
+			path = TimeTagView;
+			sourceTree = "<group>";
+		};
 		C6C686BA197F7C430042DAEF = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +257,7 @@
 		C6C686C5197F7C430042DAEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6916B121985FB690025ACE9 /* QuartzCore.framework */,
 				C6C686C6197F7C430042DAEF /* Foundation.framework */,
 				C6C686C8197F7C430042DAEF /* CoreGraphics.framework */,
 				C6C686CA197F7C430042DAEF /* UIKit.framework */,
@@ -307,8 +336,7 @@
 		C6C686FD197F9CD70042DAEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C6C687231980AE710042DAEF /* TRMineView.h */,
-				C6C687241980AE710042DAEF /* TRMineView.m */,
+				C6916B1F1986384B0025ACE9 /* TimeTagView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,11 +353,11 @@
 		C6C68700197F9D820042DAEF /* Time */ = {
 			isa = PBXGroup;
 			children = (
-				C6C687311980B7010042DAEF /* Time.storyboard */,
 				C6C68701197F9DA90042DAEF /* TRTimeTableViewController.h */,
 				C6C68702197F9DA90042DAEF /* TRTimeTableViewController.m */,
 				C6C68746198205C60042DAEF /* TRTimeEditTableViewController.h */,
 				C6C68747198205C60042DAEF /* TRTimeEditTableViewController.m */,
+				C6C687311980B7010042DAEF /* Time.storyboard */,
 			);
 			path = Time;
 			sourceTree = "<group>";
@@ -337,6 +365,7 @@
 		C6C6870B197FBA3F0042DAEF /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				C6916B0E1985FAEE0025ACE9 /* DWTagList */,
 				8ECD852F1980A53800A71228 /* LevelDB */,
 				C6C6870C197FBAA90042DAEF /* Sugar */,
 			);
@@ -348,6 +377,8 @@
 			children = (
 				C6C6870D197FBAC70042DAEF /* UIViewController+Sugar.h */,
 				C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */,
+				C6916B1C19862D970025ACE9 /* UIColor+Sugar.h */,
+				C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */,
 			);
 			path = Sugar;
 			sourceTree = "<group>";
@@ -461,6 +492,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = C6C686BA197F7C430042DAEF;
 			productRefGroup = C6C686C4197F7C430042DAEF /* Products */;
@@ -540,17 +573,19 @@
 				C6C6874F198238650042DAEF /* TRPhotoPickerModel.m in Sources */,
 				C6C6872D1980B45C0042DAEF /* TRTimePhotoModel.m in Sources */,
 				C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */,
+				C6916B221986387F0025ACE9 /* TRTimeTagListView.m in Sources */,
 				C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */,
 				C6C6873B1980B9770042DAEF /* TRTimeManager.m in Sources */,
 				8E377F3B198504A70024A648 /* TRPhotoTagViewController.m in Sources */,
 				C6C686D3197F7C430042DAEF /* main.m in Sources */,
 				8E377F38198504A70024A648 /* TRPhotoPicker.m in Sources */,
-				C6C687251980AE710042DAEF /* TRMineView.m in Sources */,
 				8E377F45198539290024A648 /* TRPhotoPickerManager.m in Sources */,
 				8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */,
+				C6916B111985FB150025ACE9 /* DWTagList.m in Sources */,
 				C6C68703197F9DA90042DAEF /* TRTimeTableViewController.m in Sources */,
 				C6C6874B19821C590042DAEF /* TRTimeEditManager.m in Sources */,
 				8E377F3F198521B20024A648 /* TRPhotoEditTableViewController.m in Sources */,
+				C6916B1E19862D970025ACE9 /* UIColor+Sugar.m in Sources */,
 				C6C687291980B2770042DAEF /* TRTimeModel.m in Sources */,
 				C6C6870F197FBAC70042DAEF /* UIViewController+Sugar.m in Sources */,
 				C6C68748198205C60042DAEF /* TRTimeEditTableViewController.m in Sources */,
@@ -588,6 +623,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C6C686D9197F7C430042DAEF /* Base */,
+				C6916B1B19862AC00025ACE9 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
