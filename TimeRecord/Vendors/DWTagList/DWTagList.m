@@ -111,13 +111,6 @@
     }
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self display];
-}
-
 - (void)display
 {
     static int i = 0;

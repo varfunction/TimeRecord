@@ -26,7 +26,8 @@
 
 @interface TRTimeTagListView ()
 
-@property (nonatomic, strong) UIView *view;
+// TRTagView
+@property (nonatomic, strong) NSMutableArray *timeTags;
 
 @end
 
@@ -38,28 +39,62 @@
     if (self) {
         // Initialization code
         self.clipsToBounds = YES;
+        self.timeTags = [NSMutableArray array];
     }
     return self;
 }
 
-- (void)setTimeTags:(NSArray *)timeTags
+- (void)pushTag:(TRTimeTagView *)tag
 {
-    _timeTags = timeTags;
-    for (TRTimeTagView *tag in self.timeTags) {
-        [self addSubview:tag];
-    }
+    [_timeTags insertObject:tag atIndex:0];
+    [self addSubview:tag];
 }
 
-- (void)layoutSubviews
+- (void)insertTag:(TRTimeTagView *)tag atIndex:(NSUInteger)index
 {
-    [super layoutSubviews];
-    
-    [self display];
+    [_timeTags insertObject:tag atIndex:index];
+    [self addSubview:tag];
+}
+
+- (void)removeTagAtIndex:(NSUInteger)index
+{
+    TRTimeTagView *tag = [_timeTags objectAtIndex:index];
+    [tag removeFromSuperview];
+    [_timeTags removeObjectAtIndex:index];
+}
+
+- (void)replaceTagAtIndex:(NSUInteger)index withTag:(TRTimeTagView *)tag
+{
+    TRTimeTagView *tagBefore = [_timeTags objectAtIndex:index];
+    [tagBefore removeFromSuperview];
+    [_timeTags removeObjectAtIndex:index];
+    [self addSubview:tag];
+    [_timeTags insertObject:tag atIndex:index];
+}
+
+- (void)resizeAllRect
+{
+    CGRect prevRect = CGRectZero;
+    for (int i = 0; i < _timeTags.count; i++) {
+        TRTimeTagView *curTag = _timeTags[i];
+        CGFloat prevRight = prevRect.origin.x + prevRect.size.width;
+        CGFloat prevBottom = prevRect.origin.y + prevRect.size.height;
+        if (prevRight + _horizonLabelMargin + curTag.width + _horizonLabelMargin > self.width) {
+            // new line
+            CGRect tempRect = CGRectMake(_horizonLabelMargin, (prevBottom + _verticalLabelMargin), curTag.width, curTag.height);
+            curTag.frame = tempRect;
+        } else {
+            // append
+            CGRect tempRect = CGRectMake(prevRight + _horizonLabelMargin, prevRect.origin.y, curTag.width, curTag.height);
+            curTag.frame = tempRect;
+        }
+        prevRect = curTag.frame;
+    }
 }
 
 - (void)display
 {
-
+    
     CGRect previousFrame = CGRectZero;
     BOOL gotPreviousFrame = NO;
     
@@ -156,8 +191,7 @@
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [_label setTextColor:TEXT_COLOR];
         [_label setShadowColor:TEXT_SHADOW_COLOR];
@@ -207,19 +241,8 @@
                  padding:(CGSize)padding
             minimumWidth:(CGFloat)minimumWidth
 {
-    CGSize textSize = CGSizeZero;
-    BOOL isTextAttributedString = [text isKindOfClass:[NSAttributedString class]];
-    
-    if (isTextAttributedString) {
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:text];
-        [attributedString addAttributes:@{NSFontAttributeName: font} range:NSMakeRange(0, ((NSAttributedString *)text).string.length)];
-        
-        textSize = [attributedString boundingRectWithSize:CGSizeMake(maxWidth, 0) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
-        _label.attributedText = [attributedString copy];
-    } else {
-        textSize = [text sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
-        _label.text = text;
-    }
+    CGSize textSize = [text sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
+    _label.text = text;
     
     textSize.width = MAX(textSize.width, minimumWidth);
     textSize.height += padding.height*2;

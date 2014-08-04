@@ -20,6 +20,7 @@
 		C6916B14198613C80025ACE9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6916B121985FB690025ACE9 /* QuartzCore.framework */; };
 		C6916B1E19862D970025ACE9 /* UIColor+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */; };
 		C6916B221986387F0025ACE9 /* TRTimeTagListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B211986387F0025ACE9 /* TRTimeTagListView.m */; };
+		C6C08044198FB0F000195189 /* UIView+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C08043198FB0F000195189 /* UIView+Sugar.m */; };
 		C6C686C7197F7C430042DAEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C6197F7C430042DAEF /* Foundation.framework */; };
 		C6C686C9197F7C430042DAEF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C8197F7C430042DAEF /* CoreGraphics.framework */; };
 		C6C686CB197F7C430042DAEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686CA197F7C430042DAEF /* UIKit.framework */; };
@@ -82,6 +83,8 @@
 		C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Sugar.m"; sourceTree = "<group>"; };
 		C6916B201986387F0025ACE9 /* TRTimeTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimeTagListView.h; sourceTree = "<group>"; };
 		C6916B211986387F0025ACE9 /* TRTimeTagListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTimeTagListView.m; sourceTree = "<group>"; };
+		C6C08042198FB0F000195189 /* UIView+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Sugar.h"; sourceTree = "<group>"; };
+		C6C08043198FB0F000195189 /* UIView+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Sugar.m"; sourceTree = "<group>"; };
 		C6C686C3197F7C430042DAEF /* TimeRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C686C6197F7C430042DAEF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6C686C8197F7C430042DAEF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -379,6 +382,8 @@
 				C6C6870E197FBAC70042DAEF /* UIViewController+Sugar.m */,
 				C6916B1C19862D970025ACE9 /* UIColor+Sugar.h */,
 				C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */,
+				C6C08042198FB0F000195189 /* UIView+Sugar.h */,
+				C6C08043198FB0F000195189 /* UIView+Sugar.m */,
 			);
 			path = Sugar;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 				C6C6874F198238650042DAEF /* TRPhotoPickerModel.m in Sources */,
 				C6C6872D1980B45C0042DAEF /* TRTimePhotoModel.m in Sources */,
 				C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */,
+				C6C08044198FB0F000195189 /* UIView+Sugar.m in Sources */,
 				C6916B221986387F0025ACE9 /* TRTimeTagListView.m in Sources */,
 				C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */,
 				C6C6873B1980B9770042DAEF /* TRTimeManager.m in Sources */,

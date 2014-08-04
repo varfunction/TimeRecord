@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
 
 // Syntactic sugar
+    #import "UIView+Sugar.h"
     #import "UIViewController+Sugar.h"
     #import "UIColor+Sugar.h"
 // venders
