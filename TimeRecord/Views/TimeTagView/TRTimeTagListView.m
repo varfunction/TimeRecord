@@ -24,6 +24,134 @@
 #define DEFAULT_AUTOMATIC_RESIZE NO
 #define DEFAULT_SHOW_TAG_MENU NO
 
+@interface TRTimeTagView ()
+
+@end
+
+@implementation TRTimeTagView
+
+- (id)init
+{
+    if (self = [super init]) {
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [_label setTextColor:TEXT_COLOR];
+        [_label setShadowColor:TEXT_SHADOW_COLOR];
+        [_label setShadowOffset:TEXT_SHADOW_OFFSET];
+        [_label setBackgroundColor:[UIColor clearColor]];
+        [_label setTextAlignment:NSTextAlignmentCenter];
+        [self addSubview:_label];
+        
+        _button = [UIButton buttonWithType:UIButtonTypeCustom];
+        _button.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [_button setFrame:self.frame];
+        [self addSubview:_button];
+        
+        [self.layer setMasksToBounds:YES];
+        [self.layer setCornerRadius:CORNER_RADIUS];
+        [self.layer setBorderColor:BORDER_COLOR];
+        [self.layer setBorderWidth:BORDER_WIDTH];
+    }
+    int rand =  arc4random() % 4;
+    UIColor *color = [UIColor brownColor];
+    switch (rand) {
+        case 0:
+            color = [UIColor colorWithHexString:@"#91d180"];
+            break;
+        case 1:
+            color = [UIColor colorWithHexString:@"#81b0f1"];
+            break;
+        case 2:
+            color = [UIColor colorWithHexString:@"#f1d038"];
+            break;
+        case 3:
+            color = [UIColor colorWithHexString:@"#ff5d73"];
+            break;
+        default:
+            break;
+    }
+    if (self.backgroundColor == nil) {
+        [self setBackgroundColor:color];
+        NSLog(@"color....");
+    }
+    return self;
+}
+
+- (instancetype)initWithTitle:(NSString*)title
+                         font:(UIFont*)font
+                      padding:(CGSize)padding
+                     maxWidth:(CGFloat)maxWidth
+                     minWidth:(CGFloat)minWidth
+{
+    if ([self init]) {
+        CGSize textSize = [title sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
+        _label.text = title;
+        
+        textSize.width = MAX(textSize.width, minWidth);
+        textSize.height += padding.height*2;
+        
+        self.frame = CGRectMake(0, 0, textSize.width+padding.width*2, textSize.height);
+        _label.frame = CGRectMake(padding.width, 0, MIN(textSize.width, self.frame.size.width), textSize.height);
+        _label.font = font;
+    }
+    return self;
+}
+
+- (void)updateWithString:(NSString*)text
+                    font:(UIFont*)font
+      constrainedToWidth:(CGFloat)maxWidth
+                 padding:(CGSize)padding
+            minimumWidth:(CGFloat)minimumWidth
+{
+    CGSize textSize = [text sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
+    _label.text = text;
+    
+    textSize.width = MAX(textSize.width, minimumWidth);
+    textSize.height += padding.height*2;
+    
+    self.frame = CGRectMake(0, 0, textSize.width+padding.width*2, textSize.height);
+    _label.frame = CGRectMake(padding.width, 0, MIN(textSize.width, self.frame.size.width), textSize.height);
+    _label.font = font;
+    
+    [_button setAccessibilityLabel:self.label.text];
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+    [self.layer setCornerRadius:cornerRadius];
+}
+
+- (void)setBorderColor:(CGColorRef)borderColor
+{
+    [self.layer setBorderColor:borderColor];
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth
+{
+    [self.layer setBorderWidth:borderWidth];
+}
+
+- (void)setLabelText:(NSString*)text
+{
+    [_label setText:text];
+}
+
+- (void)setTextColor:(UIColor *)textColor
+{
+    [_label setTextColor:textColor];
+}
+
+- (void)setTextShadowColor:(UIColor*)textShadowColor
+{
+    [_label setShadowColor:textShadowColor];
+}
+
+- (void)setTextShadowOffset:(CGSize)textShadowOffset
+{
+    [_label setShadowOffset:textShadowOffset];
+}
+
+@end
+
 @interface TRTimeTagListView ()
 
 // TRTagView
@@ -48,6 +176,7 @@
 {
     [_timeTags insertObject:tag atIndex:0];
     [self addSubview:tag];
+    [self resizeAllTagRect];
 }
 
 - (void)insertTag:(TRTimeTagView *)tag atIndex:(NSUInteger)index
@@ -72,7 +201,7 @@
     [_timeTags insertObject:tag atIndex:index];
 }
 
-- (void)resizeAllRect
+- (void)resizeAllTagRect
 {
     CGRect prevRect = CGRectZero;
     for (int i = 0; i < _timeTags.count; i++) {
@@ -90,6 +219,7 @@
         }
         prevRect = curTag.frame;
     }
+    self.contentSize = CGSizeMake(self.frame.size.width, prevRect.origin.y + prevRect.size.height + 5 + 1.0f);
 }
 
 - (void)display
@@ -183,110 +313,4 @@
 
 @end
 
-@interface TRTimeTagView ()
 
-@end
-
-@implementation TRTimeTagView
-
-- (id)init
-{
-    if (self = [super init]) {
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [_label setTextColor:TEXT_COLOR];
-        [_label setShadowColor:TEXT_SHADOW_COLOR];
-        [_label setShadowOffset:TEXT_SHADOW_OFFSET];
-        [_label setBackgroundColor:[UIColor clearColor]];
-        [_label setTextAlignment:NSTextAlignmentCenter];
-        [self addSubview:_label];
-        
-        _button = [UIButton buttonWithType:UIButtonTypeCustom];
-        _button.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [_button setFrame:self.frame];
-        [self addSubview:_button];
-        
-        [self.layer setMasksToBounds:YES];
-        [self.layer setCornerRadius:CORNER_RADIUS];
-        [self.layer setBorderColor:BORDER_COLOR];
-        [self.layer setBorderWidth:BORDER_WIDTH];
-    }
-    int rand =  arc4random() % 4;
-    UIColor *color = [UIColor brownColor];
-    switch (rand) {
-        case 0:
-            color = [UIColor colorWithHexString:@"#91d180"];
-            break;
-        case 1:
-            color = [UIColor colorWithHexString:@"#81b0f1"];
-            break;
-        case 2:
-            color = [UIColor colorWithHexString:@"#f1d038"];
-            break;
-        case 3:
-            color = [UIColor colorWithHexString:@"#ff5d73"];
-            break;
-        default:
-            break;
-    }
-    if (self.backgroundColor == nil) {
-        [self setBackgroundColor:color];
-        NSLog(@"color....");
-    }
-    return self;
-}
-
-- (void)updateWithString:(NSString*)text
-                    font:(UIFont*)font
-      constrainedToWidth:(CGFloat)maxWidth
-                 padding:(CGSize)padding
-            minimumWidth:(CGFloat)minimumWidth
-{
-    CGSize textSize = [text sizeWithFont:font forWidth:maxWidth lineBreakMode:NSLineBreakByTruncatingTail];
-    _label.text = text;
-    
-    textSize.width = MAX(textSize.width, minimumWidth);
-    textSize.height += padding.height*2;
-    
-    self.frame = CGRectMake(0, 0, textSize.width+padding.width*2, textSize.height);
-    _label.frame = CGRectMake(padding.width, 0, MIN(textSize.width, self.frame.size.width), textSize.height);
-    _label.font = font;
-    
-    [_button setAccessibilityLabel:self.label.text];
-}
-
-- (void)setCornerRadius:(CGFloat)cornerRadius
-{
-    [self.layer setCornerRadius:cornerRadius];
-}
-
-- (void)setBorderColor:(CGColorRef)borderColor
-{
-    [self.layer setBorderColor:borderColor];
-}
-
-- (void)setBorderWidth:(CGFloat)borderWidth
-{
-    [self.layer setBorderWidth:borderWidth];
-}
-
-- (void)setLabelText:(NSString*)text
-{
-    [_label setText:text];
-}
-
-- (void)setTextColor:(UIColor *)textColor
-{
-    [_label setTextColor:textColor];
-}
-
-- (void)setTextShadowColor:(UIColor*)textShadowColor
-{
-    [_label setShadowColor:textShadowColor];
-}
-
-- (void)setTextShadowOffset:(CGSize)textShadowOffset
-{
-    [_label setShadowOffset:textShadowOffset];
-}
-
-@end

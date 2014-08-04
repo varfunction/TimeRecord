@@ -13,6 +13,12 @@
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UILabel *label;
 
+- (instancetype)initWithTitle:(NSString*)title
+                         font:(UIFont*)font
+                      padding:(CGSize)padding
+                     maxWidth:(CGFloat)maxWidth
+                     minWidth:(CGFloat)minWidth;
+
 - (void)updateWithString:(NSString*)text
                     font:(UIFont*)font
       constrainedToWidth:(CGFloat)maxWidth

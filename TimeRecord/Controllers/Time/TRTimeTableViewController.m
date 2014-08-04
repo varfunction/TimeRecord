@@ -38,12 +38,13 @@
 //    [tagList setTags:array];
     
     TRTimeTagListView *tagList = [[TRTimeTagListView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    NSMutableArray *array = [NSMutableArray array];
+    tagList.verticalLabelMargin = 5;
+    tagList.horizonLabelMargin = 5;
+    
     for (int i = 0; i < 100; i++) {
-        TRTimeTagView *view = [[TRTimeTagView alloc] init];
-        [array addObject:view];
+        TRTimeTagView *view = [[TRTimeTagView alloc] initWithTitle:[NSString stringWithFormat:@"%d", i] font:[UIFont systemFontOfSize:13] padding:CGSizeMake(5, 5) maxWidth:300 minWidth:60];
+        [tagList pushTag:view];
     }
-    [tagList setTimeTags:array];
     
     // Add the taglist to your UIView
     [self.contentView addSubview:tagList];
