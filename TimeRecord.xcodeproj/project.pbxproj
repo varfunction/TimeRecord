@@ -25,7 +25,6 @@
 		C6C686C7197F7C430042DAEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C6197F7C430042DAEF /* Foundation.framework */; };
 		C6C686C9197F7C430042DAEF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C8197F7C430042DAEF /* CoreGraphics.framework */; };
 		C6C686CB197F7C430042DAEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686CA197F7C430042DAEF /* UIKit.framework */; };
-		C6C686D1197F7C430042DAEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6C686CF197F7C430042DAEF /* InfoPlist.strings */; };
 		C6C686D3197F7C430042DAEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C686D2197F7C430042DAEF /* main.m */; };
 		C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C686D6197F7C430042DAEF /* TRAppDelegate.m */; };
 		C6C686DA197F7C430042DAEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6C686D8197F7C430042DAEF /* Main.storyboard */; };
@@ -33,7 +32,6 @@
 		C6C686E6197F7C430042DAEF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686E5197F7C430042DAEF /* XCTest.framework */; };
 		C6C686E7197F7C430042DAEF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686C6197F7C430042DAEF /* Foundation.framework */; };
 		C6C686E8197F7C430042DAEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C686CA197F7C430042DAEF /* UIKit.framework */; };
-		C6C686F0197F7C430042DAEF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6C686EE197F7C430042DAEF /* InfoPlist.strings */; };
 		C6C686F2197F7C430042DAEF /* TimeRecordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C686F1197F7C430042DAEF /* TimeRecordTests.m */; };
 		C6C68703197F9DA90042DAEF /* TRTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68702197F9DA90042DAEF /* TRTimeTableViewController.m */; };
 		C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C68705197F9DB90042DAEF /* TRMineTableViewController.m */; };
@@ -78,10 +76,10 @@
 		B80D4A2BF5F1432D91312A96 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C64B5B8D1994B34200949DEF /* TRPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoBrowser.h; sourceTree = "<group>"; };
 		C64B5B8E1994B34200949DEF /* TRPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoBrowser.m; sourceTree = "<group>"; };
+		C64B5B911994BB4600949DEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C6916B0F1985FB150025ACE9 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
 		C6916B101985FB150025ACE9 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
 		C6916B121985FB690025ACE9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C6916B1B19862AC00025ACE9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C6916B1C19862D970025ACE9 /* UIColor+Sugar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Sugar.h"; sourceTree = "<group>"; };
 		C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Sugar.m"; sourceTree = "<group>"; };
 		C6916B201986387F0025ACE9 /* TRTimeTagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimeTagListView.h; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 		C6C686C8197F7C430042DAEF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C6C686CA197F7C430042DAEF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C6C686CE197F7C430042DAEF /* TimeRecord-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimeRecord-Info.plist"; sourceTree = "<group>"; };
-		C6C686D0197F7C430042DAEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C6C686D2197F7C430042DAEF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C6C686D4197F7C430042DAEF /* TimeRecord-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeRecord-Prefix.pch"; sourceTree = "<group>"; };
 		C6C686D5197F7C430042DAEF /* TRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRAppDelegate.h; sourceTree = "<group>"; };
@@ -103,7 +100,6 @@
 		C6C686E4197F7C430042DAEF /* TimeRecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeRecordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6C686E5197F7C430042DAEF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C6C686ED197F7C430042DAEF /* TimeRecordTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimeRecordTests-Info.plist"; sourceTree = "<group>"; };
-		C6C686EF197F7C430042DAEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C6C686F1197F7C430042DAEF /* TimeRecordTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeRecordTests.m; sourceTree = "<group>"; };
 		C6C68701197F9DA90042DAEF /* TRTimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRTimeTableViewController.h; sourceTree = "<group>"; };
 		C6C68702197F9DA90042DAEF /* TRTimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRTimeTableViewController.m; sourceTree = "<group>"; };
@@ -295,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				C6C686CE197F7C430042DAEF /* TimeRecord-Info.plist */,
-				C6C686CF197F7C430042DAEF /* InfoPlist.strings */,
 				C6C686D2197F7C430042DAEF /* main.m */,
 				C6C686D4197F7C430042DAEF /* TimeRecord-Prefix.pch */,
 			);
@@ -315,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				C6C686ED197F7C430042DAEF /* TimeRecordTests-Info.plist */,
-				C6C686EE197F7C430042DAEF /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -523,7 +517,6 @@
 			files = (
 				C6C686DF197F7C430042DAEF /* Images.xcassets in Resources */,
 				C6C687321980B7010042DAEF /* Time.storyboard in Resources */,
-				C6C686D1197F7C430042DAEF /* InfoPlist.strings in Resources */,
 				8E377F3A198504A70024A648 /* PhotoTag.storyboard in Resources */,
 				C6C686DA197F7C430042DAEF /* Main.storyboard in Resources */,
 				8E377F411985224B0024A648 /* Photo.storyboard in Resources */,
@@ -534,7 +527,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6C686F0197F7C430042DAEF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,29 +615,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C6C686CF197F7C430042DAEF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6C686D0197F7C430042DAEF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		C6C686D8197F7C430042DAEF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C6C686D9197F7C430042DAEF /* Base */,
-				C6916B1B19862AC00025ACE9 /* zh-Hans */,
+				C64B5B911994BB4600949DEF /* zh-Hans */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C6C686EE197F7C430042DAEF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6C686EF197F7C430042DAEF /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

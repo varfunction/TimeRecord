@@ -2,8 +2,8 @@
 /* Class = "IBUILabel"; text = "time"; ObjectID = "0Ep-jH-m1D"; */
 "0Ep-jH-m1D.text" = "time";
 
-/* Class = "IBUITabBarItem"; title = "时光"; ObjectID = "0Vi-zL-eVh"; */
-"0Vi-zL-eVh.title" = "时光";
+/* Class = "IBUITabBarItem"; title = "11111"; ObjectID = "0Vi-zL-eVh"; */
+"0Vi-zL-eVh.title" = "11111";
 
 /* Class = "IBUILabel"; text = "summary"; ObjectID = "12J-5r-Dup"; */
 "12J-5r-Dup.text" = "summary";
@@ -20,5 +20,5 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "d1r-4w-EKo"; */
 "d1r-4w-EKo.text" = "Label";
 
-/* Class = "IBUITabBarItem"; title = "我"; ObjectID = "w1S-tN-WEF"; */
-"w1S-tN-WEF.title" = "我";
+/* Class = "IBUITabBarItem"; title = "22222"; ObjectID = "w1S-tN-WEF"; */
+"w1S-tN-WEF.title" = "22222";

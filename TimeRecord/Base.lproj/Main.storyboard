@@ -4,11 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller - 时光-->
+        <!--Navigation Controller - 11111-->
         <scene sceneID="RvR-A4-5FS">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Jq1-E0-gb7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="时光" id="0Vi-zL-eVh"/>
+                    <tabBarItem key="tabBarItem" title="11111" image="Checkmark.png" id="0Vi-zL-eVh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kZ7-m5-slB">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -137,11 +137,11 @@
             </objects>
             <point key="canvasLocation" x="233" y="169"/>
         </scene>
-        <!--Navigation Controller - 我-->
+        <!--Navigation Controller - 22222-->
         <scene sceneID="BWZ-tX-sZw">
             <objects>
                 <navigationController definesPresentationContext="YES" id="u8e-XI-58b" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" id="w1S-tN-WEF"/>
+                    <tabBarItem key="tabBarItem" title="22222" image="ImageError.png" id="w1S-tN-WEF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8eq-di-O9Y">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -184,6 +184,10 @@
             <point key="canvasLocation" x="1289" y="511"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Checkmark.png" width="37" height="37"/>
+        <image name="ImageError.png" width="40" height="40"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
