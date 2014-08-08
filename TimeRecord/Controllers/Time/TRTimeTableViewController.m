@@ -65,14 +65,35 @@
 
 - (void)setContent:(TRTimeModel *)model
 {
-    self.timeView.layer.borderWidth = 1.0;
-    self.timeView.layer.borderColor = [[UIColor clearColor] CGColor];
-    self.timeView.layer.cornerRadius = 10;
+    int rand =  arc4random() % 4;
+    UIColor *color = [UIColor brownColor];
+    switch (rand) {
+        case 0:
+            color = [UIColor colorWithHexString:@"#91d180"];
+            break;
+        case 1:
+            color = [UIColor colorWithHexString:@"#81b0f1"];
+            break;
+        case 2:
+            color = [UIColor colorWithHexString:@"#f1d038"];
+            break;
+        case 3:
+            color = [UIColor colorWithHexString:@"#ff5d73"];
+            break;
+        default:
+            break;
+    }
     
-    self.timeView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.timeView.layer.shadowOpacity = 0.8;
-    self.timeView.layer.shadowRadius = 10.0;
-    self.timeView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.timeView.backgroundColor = color;
+    
+    self.timeView.layer.borderWidth = 2.0;
+    self.timeView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.timeView.layer.cornerRadius = 5;
+    
+//    self.timeView.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.timeView.layer.shadowOpacity = 0.8;
+//    self.timeView.layer.shadowRadius = 5.0;
+//    self.timeView.layer.shadowOffset = CGSizeMake(0, 1);
     
     self.model = model;
     self.timeTitle.text = model.timeHomePhoto.photoTitle;
@@ -173,23 +194,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    TRTimeTableCell *cell = (TRTimeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
-//    TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
-//    
-//    [cell setContent:timeModel];
-    
-    TRTimeTagTableCell *cell = (TRTimeTagTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTagTableCell" forIndexPath:indexPath];
+    TRTimeTableCell *cell = (TRTimeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTableCell" forIndexPath:indexPath];
     TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
     
     [cell setContent:timeModel];
+    
+//    TRTimeTagTableCell *cell = (TRTimeTagTableCell *)[tableView dequeueReusableCellWithIdentifier:@"RUID_TRTimeTagTableCell" forIndexPath:indexPath];
+//    TRTimeModel *timeModel = [TRTimeManager sharedInstance].allTime[indexPath.row];
+//    
+//    [cell setContent:timeModel];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return tableView.frame.size.height - 49 - 44 - 20;//[self.tabBarController tabBar].frame.size.height;
+    return 120;
+//    return tableView.frame.size.height - 49 - 44 - 20;//[self.tabBarController tabBar].frame.size.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

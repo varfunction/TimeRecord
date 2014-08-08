@@ -16,6 +16,7 @@
 		8E377F411985224B0024A648 /* Photo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E377F401985224B0024A648 /* Photo.storyboard */; };
 		8E377F45198539290024A648 /* TRPhotoPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E377F44198539290024A648 /* TRPhotoPickerManager.m */; };
 		8ECD85321980A55C00A71228 /* TRLevelDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECD85311980A55C00A71228 /* TRLevelDB.m */; };
+		C64B5B8F1994B34200949DEF /* TRPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = C64B5B8E1994B34200949DEF /* TRPhotoBrowser.m */; };
 		C6916B111985FB150025ACE9 /* DWTagList.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B101985FB150025ACE9 /* DWTagList.m */; };
 		C6916B14198613C80025ACE9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6916B121985FB690025ACE9 /* QuartzCore.framework */; };
 		C6916B1E19862D970025ACE9 /* UIColor+Sugar.m in Sources */ = {isa = PBXBuildFile; fileRef = C6916B1D19862D970025ACE9 /* UIColor+Sugar.m */; };
@@ -75,6 +76,8 @@
 		8ECD85301980A55C00A71228 /* TRLevelDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRLevelDB.h; sourceTree = "<group>"; };
 		8ECD85311980A55C00A71228 /* TRLevelDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRLevelDB.m; sourceTree = "<group>"; };
 		B80D4A2BF5F1432D91312A96 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C64B5B8D1994B34200949DEF /* TRPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoBrowser.h; sourceTree = "<group>"; };
+		C64B5B8E1994B34200949DEF /* TRPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoBrowser.m; sourceTree = "<group>"; };
 		C6916B0F1985FB150025ACE9 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
 		C6916B101985FB150025ACE9 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
 		C6916B121985FB690025ACE9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -167,6 +170,8 @@
 			children = (
 				8E377F2C198504A70024A648 /* TRPhotoBrowserDelegate.h */,
 				8E377F2D198504A70024A648 /* TRPhotoBrowserDelegate.m */,
+				C64B5B8D1994B34200949DEF /* TRPhotoBrowser.h */,
+				C64B5B8E1994B34200949DEF /* TRPhotoBrowser.m */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				C6C68706197F9DB90042DAEF /* TRMineTableViewController.m in Sources */,
 				C6C08044198FB0F000195189 /* UIView+Sugar.m in Sources */,
 				C6916B221986387F0025ACE9 /* TRTimeTagListView.m in Sources */,
+				C64B5B8F1994B34200949DEF /* TRPhotoBrowser.m in Sources */,
 				C6C686D7197F7C430042DAEF /* TRAppDelegate.m in Sources */,
 				C6C6873B1980B9770042DAEF /* TRTimeManager.m in Sources */,
 				8E377F3B198504A70024A648 /* TRPhotoTagViewController.m in Sources */,
