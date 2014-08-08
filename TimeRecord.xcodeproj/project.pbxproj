@@ -76,7 +76,7 @@
 		B80D4A2BF5F1432D91312A96 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C64B5B8D1994B34200949DEF /* TRPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRPhotoBrowser.h; sourceTree = "<group>"; };
 		C64B5B8E1994B34200949DEF /* TRPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRPhotoBrowser.m; sourceTree = "<group>"; };
-		C64B5B911994BB4600949DEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C64B5B941994C28400949DEF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C6916B0F1985FB150025ACE9 /* DWTagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DWTagList.h; sourceTree = "<group>"; };
 		C6916B101985FB150025ACE9 /* DWTagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWTagList.m; sourceTree = "<group>"; };
 		C6916B121985FB690025ACE9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -619,7 +619,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C6C686D9197F7C430042DAEF /* Base */,
-				C64B5B911994BB4600949DEF /* zh-Hans */,
+				C64B5B941994C28400949DEF /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

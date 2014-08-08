@@ -7,6 +7,7 @@
 //
 
 #import "TRMineTableViewController.h"
+#import "TRPhotoBrowser.h"
 
 @interface TRMineTableViewController ()
 
@@ -32,6 +33,30 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:(UIBarButtonItemStylePlain) target:self action:@selector(didPressedRightBarButton)];
+}
+
+- (void)didPressedRightBarButton
+{
+    TRPhotoBrowser *browser = [[TRPhotoBrowser alloc] init];
+    browser.view.frame = self.view.frame;
+    browser.view.backgroundColor = [UIColor redColor];
+    
+    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:browser];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    vc.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+//    CATransition *transition=[CATransition animation];
+//    transition.timingFunction=UIViewAnimationCurveEaseInOut;
+//    transition.duration=0.4;
+//    transition.type=kCATransitionMoveIn;
+//    transition.type=kCATransitionPush;
+//    transition.subtype=kCATransitionFromRight;
+//    [browser.view.layer addAnimation:transition forKey:nil];
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning
