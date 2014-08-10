@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TRPhotoBrowser.h"
 
-@interface TRMineTableViewController : UITableViewController
+@interface TRMineTableViewController : UITableViewController <TRPhotoBrowserDelegate>
 
 @end

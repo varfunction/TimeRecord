@@ -8,11 +8,24 @@
 
 #import "TRPhotoBrowser.h"
 
+#define WIDTH_PAGE (self.view.width)
+#define HEIGHT_PAGE (self.view.height)
+#define CONTENT_MODEL UIViewContentModeScaleAspectFill
+
 @interface TRPhotoBrowser ()
 
 @property (nonatomic, assign) BOOL isHidden;
-@property (nonatomic, strong) UIScrollView *heightScrollView;
-@property (nonatomic, strong) UIScrollView *widthScrollView;
+@property (nonatomic, strong) UIScrollView *verticalScrollView;
+@property (nonatomic, strong) UIImageView *blurredImageView;
+@property (nonatomic, strong) UILabel *descLabel;
+
+@property (nonatomic, strong) UIScrollView *horizonScrollView;
+@property (nonatomic, strong) NSArray *reuseImageViewArray;
+
+@property (nonatomic, strong) UIImageView *testImage;
+
+@property (nonatomic, assign) NSUInteger currentReuseIndex;
+@property (nonatomic, assign) NSUInteger currentPhotoIndex;
 
 @end
 
@@ -27,18 +40,129 @@
     return self;
 }
 
+- (id)initWithDelegate:(id <TRPhotoBrowserDelegate>)delegate {
+    if ((self = [self init])) {
+        _delegate = delegate;
+	}
+	return self;
+}
+
+- (void)initScrollView
+{
+    CGFloat width = WIDTH_PAGE;
+    CGFloat height = HEIGHT_PAGE;
+    
+    
+    // 垂直滚动view
+    self.verticalScrollView = [[UIScrollView alloc] init];
+    self.verticalScrollView.pagingEnabled = YES;
+    self.verticalScrollView.bounces = NO;
+    self.verticalScrollView.frame = self.view.bounds;
+    self.verticalScrollView.height = height;
+    self.verticalScrollView.width = width;
+    self.verticalScrollView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    self.verticalScrollView.contentSize = CGSizeMake(width, 2 * height);
+    
+    self.verticalScrollView.delegate = self;
+    
+    self.blurredImageView = [[UIImageView alloc] init];
+    self.blurredImageView.contentMode = CONTENT_MODEL;
+    self.blurredImageView.alpha = 0;
+    self.blurredImageView.frame = self.view.bounds;
+    self.blurredImageView.width = width;
+    self.blurredImageView.height = height;
+    
+    [self.verticalScrollView addSubview:self.blurredImageView];
+    [self reloadBluredImage];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont boldSystemFontOfSize:30];
+    label.text = @"hello world";
+    label.frame = CGRectMake(10, 0, 300, 50);
+    label.top = self.blurredImageView.bottom;
+    [self.verticalScrollView addSubview:label];
+    
+    [self.view addSubview:self.verticalScrollView];
+    
+    // 水平滚动view
+    self.horizonScrollView = [[UIScrollView alloc] init];
+    self.horizonScrollView.pagingEnabled = YES;
+    self.horizonScrollView.bounces = NO;
+    self.horizonScrollView.frame = self.view.bounds;
+    self.horizonScrollView.height = height;
+    self.horizonScrollView.width = width;
+    self.horizonScrollView.backgroundColor = [UIColor clearColor];
+    
+    self.horizonScrollView.delegate = self;
+    
+    int numberOfPhoto = [self.delegate numberOfPhotosInPhotoBrowser:self];
+    self.horizonScrollView.contentSize = CGSizeMake(numberOfPhoto * width, height);
+    
+    for (UIImageView *imageView in self.reuseImageViewArray) {
+        [self.horizonScrollView addSubview:imageView];
+    }
+    
+    [self.verticalScrollView addSubview:self.horizonScrollView];
+    
+    
+    // 手势绑定
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                             action:@selector(tapWidthScrollView:)];
+    
+    [self.verticalScrollView addGestureRecognizer:tapGes];
+    
+}
+
+- (void)initImageView
+{
+    NSMutableArray *temp = [NSMutableArray array];
+    CGPoint prevPoint = CGPointZero;
+    for (int i = 0; i < 5; i++) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.width = WIDTH_PAGE;
+        imageView.height = HEIGHT_PAGE;
+        imageView.left = prevPoint.x;
+        prevPoint = CGPointMake(imageView.right, 0);
+        
+        imageView.image = [self.delegate photoBrowser:self photoAtIndex:i];
+        imageView.contentMode = CONTENT_MODEL;
+        imageView.clipsToBounds = YES;
+        [temp addObject:imageView];
+    }
+    self.reuseImageViewArray = [NSArray arrayWithArray:temp];
+    
+    self.currentReuseIndex = 0;
+}
+
+- (void)reloadBluredImage
+{
+    @weakify(self);
+    self.verticalScrollView.scrollEnabled = NO;
+    UIImageView *currentDisplayImage = _reuseImageViewArray[_currentReuseIndex];
+    [self.blurredImageView setImageToBlur:currentDisplayImage.image blurRadius:10 completionBlock:^() {
+        @strongify(self);
+        self.verticalScrollView.scrollEnabled = YES;
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:(UIBarButtonItemStylePlain) target:self action:@selector(back:)];
     
+    [self initImageView];
+    [self initScrollView];
+    
+    return;
+    
     CGFloat width = self.view.width;
     CGFloat height = self.view.height - 64;
     
-    self.widthScrollView = [[UIScrollView alloc] init];
-    self.widthScrollView.frame = self.view.bounds;
-    self.widthScrollView.pagingEnabled = YES;
-    self.widthScrollView.bounces = NO;
+    self.horizonScrollView = [[UIScrollView alloc] init];
+    self.horizonScrollView.frame = self.view.bounds;
+    self.horizonScrollView.pagingEnabled = YES;
+    self.horizonScrollView.bounces = NO;
     
     
     UIImageView *firstImage = [[UIImageView alloc] init];
@@ -46,7 +170,7 @@
     firstImage.width = width;
     firstImage.height = height;
     firstImage.backgroundColor = [UIColor greenColor];
-    [self.widthScrollView addSubview:firstImage];
+    [self.horizonScrollView addSubview:firstImage];
     
     UIImageView *secondImage = [[UIImageView alloc] init];
     secondImage.frame = self.view.bounds;
@@ -54,14 +178,14 @@
     secondImage.width = width;
     secondImage.height = height;
     secondImage.backgroundColor = [UIColor yellowColor];
-    [self.widthScrollView addSubview:secondImage];
+    [self.horizonScrollView addSubview:secondImage];
     
-    self.widthScrollView.contentSize = CGSizeMake(2 * width, height);
+    self.horizonScrollView.contentSize = CGSizeMake(2 * width, height);
     
-    self.heightScrollView = [[UIScrollView alloc] init];
-    self.heightScrollView.frame = self.view.bounds;
-    self.heightScrollView.pagingEnabled = YES;
-    self.heightScrollView.bounces = NO;
+    self.verticalScrollView = [[UIScrollView alloc] init];
+    self.verticalScrollView.frame = self.view.bounds;
+    self.verticalScrollView.pagingEnabled = YES;
+    self.verticalScrollView.bounces = NO;
     
     
     UIImageView *thirdImage = [[UIImageView alloc] init];
@@ -69,15 +193,34 @@
     thirdImage.width = width;
     thirdImage.height = height;
     thirdImage.backgroundColor = [UIColor grayColor];
-    [self.heightScrollView addSubview:thirdImage];
+    [self.verticalScrollView addSubview:thirdImage];
     
-    self.heightScrollView.contentSize = CGSizeMake(width, 2 * height);
     
-    [self.view addSubview:self.heightScrollView];
-    [self.heightScrollView addSubview:self.widthScrollView];
+    
+    self.verticalScrollView.contentSize = CGSizeMake(width, 2 * height);
+    
+    [self.verticalScrollView addSubview:self.horizonScrollView];
+    [self.view addSubview:self.verticalScrollView];
+//    [self.widthScrollView addSubview:self.heightScrollView];
+//    [self.view addSubview:self.widthScrollView];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)presentedFromViewController:(UIViewController *)viewController
+                         completion:(void (^)(void))completion
+{
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self];
+    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    [viewController presentViewController:nav animated:YES completion:^{
+        if (completion) {
+            completion();
+        }
+    }];
+     
+}
+
+- (void)tapWidthScrollView:(id)sender
 {
     UINavigationBar *navBar = self.navigationController.navigationBar;
     
@@ -92,6 +235,37 @@
     }];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.verticalScrollView) {
+        CGFloat height = scrollView.bounds.size.height;
+        CGFloat position = MAX(scrollView.contentOffset.y, 0.0);
+        CGFloat offsetY = scrollView.contentOffset.y;
+        self.blurredImageView.top = offsetY;
+        UIImageView *currentImageView = _reuseImageViewArray[_currentReuseIndex];
+        currentImageView.top = offsetY;
+        CGFloat percent = MIN(position / height, 1.0);
+        self.blurredImageView.alpha = percent;
+        currentImageView.alpha = 1-percent;
+    } else if (scrollView == self.horizonScrollView) {
+//        CGFloat offsetX = scrollView.contentOffset.x;
+        
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (scrollView == self.horizonScrollView) {
+        CGFloat offsetX = scrollView.contentOffset.x;
+        _currentPhotoIndex = offsetX / WIDTH_PAGE;
+        _currentReuseIndex = offsetX / WIDTH_PAGE;
+        
+        NSLog(@"pindex:%d, rindex:%d", _currentPhotoIndex, _currentReuseIndex);
+        
+        [self reloadBluredImage];
+    }
+}
+
 - (void)back:(id)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
@@ -99,21 +273,15 @@
     }];
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

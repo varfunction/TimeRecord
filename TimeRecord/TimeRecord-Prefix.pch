@@ -20,6 +20,7 @@
     #import "UIColor+Sugar.h"
 // venders
     #import <ReactiveCocoa/ReactiveCocoa/RACEXTScope.h>
+    #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 
 
     @import CoreLocation;

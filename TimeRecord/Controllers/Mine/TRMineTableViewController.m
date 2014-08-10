@@ -11,6 +11,8 @@
 
 @interface TRMineTableViewController ()
 
+@property (nonatomic, strong) NSMutableArray *srcArray;
+
 @end
 
 @implementation TRMineTableViewController
@@ -35,28 +37,58 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加" style:(UIBarButtonItemStylePlain) target:self action:@selector(didPressedRightBarButton)];
+    
+    self.srcArray = [NSMutableArray array];
+    
+    for (int i = 0; i < 5; i++) {
+        if (i%3 == 0) {
+            UIImage *image = [UIImage imageNamed:@"1-image.png"];
+            [self.srcArray addObject:image];
+        } else if (i%3 == 1) {
+            UIImage *image = [UIImage imageNamed:@"2-image.png"];
+            [self.srcArray addObject:image];
+        } else if (i%3 == 2) {
+            UIImage *image = [UIImage imageNamed:@"3-image.png"];
+            [self.srcArray addObject:image];
+        }
+    }
 }
 
 - (void)didPressedRightBarButton
 {
-    TRPhotoBrowser *browser = [[TRPhotoBrowser alloc] init];
+    //    CATransition *transition=[CATransition animation];
+    //    transition.timingFunction=UIViewAnimationCurveEaseInOut;
+    //    transition.duration=0.4;
+    //    transition.type=kCATransitionMoveIn;
+    //    transition.type=kCATransitionPush;
+    //    transition.subtype=kCATransitionFromRight;
+    //    [browser.view.layer addAnimation:transition forKey:nil];
+    TRPhotoBrowser *browser = [[TRPhotoBrowser alloc] initWithDelegate:self];
     browser.view.frame = self.view.frame;
-    browser.view.backgroundColor = [UIColor redColor];
     
-    UINavigationController *vc = [[UINavigationController alloc] initWithRootViewController:browser];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    vc.modalPresentationStyle = UIModalPresentationFullScreen;
-    
-//    CATransition *transition=[CATransition animation];
-//    transition.timingFunction=UIViewAnimationCurveEaseInOut;
-//    transition.duration=0.4;
-//    transition.type=kCATransitionMoveIn;
-//    transition.type=kCATransitionPush;
-//    transition.subtype=kCATransitionFromRight;
-//    [browser.view.layer addAnimation:transition forKey:nil];
-    [self presentViewController:vc animated:YES completion:^{
+    [browser presentedFromViewController:self completion:^{
         
     }];
+}
+
+- (void)dealloc
+{
+    
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(TRPhotoBrowser *)photoBrowser
+{
+    return self.srcArray.count;
+}
+
+- (UIImage *)photoBrowser:(TRPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index
+{
+    return self.srcArray[index];
+}
+
+- (NSString *)photoBrowser:(TRPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index
+{
+    return @"title";
 }
 
 - (void)didReceiveMemoryWarning
