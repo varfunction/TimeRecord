@@ -11,6 +11,7 @@
 #define WIDTH_PAGE (self.view.width)
 #define HEIGHT_PAGE (self.view.height)
 #define CONTENT_MODEL UIViewContentModeScaleAspectFill
+#define PADDING                  10
 
 @interface TRPhotoBrowser ()
 
@@ -26,6 +27,7 @@
 
 @property (nonatomic, assign) NSUInteger currentReuseIndex;
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
+@property (nonatomic, assign) BOOL preloading;
 
 @end
 
@@ -52,6 +54,9 @@
     CGFloat width = WIDTH_PAGE;
     CGFloat height = HEIGHT_PAGE;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor clearColor];
+    
     
     // 垂直滚动view
     self.verticalScrollView = [[UIScrollView alloc] init];
@@ -60,10 +65,11 @@
     self.verticalScrollView.frame = self.view.bounds;
     self.verticalScrollView.height = height;
     self.verticalScrollView.width = width;
-    self.verticalScrollView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    self.verticalScrollView.backgroundColor = [UIColor clearColor];
     self.verticalScrollView.contentSize = CGSizeMake(width, 2 * height);
-    
     self.verticalScrollView.delegate = self;
+    
+    self.verticalScrollView.clipsToBounds = YES;
     
     self.blurredImageView = [[UIImageView alloc] init];
     self.blurredImageView.contentMode = CONTENT_MODEL;
@@ -72,8 +78,8 @@
     self.blurredImageView.width = width;
     self.blurredImageView.height = height;
     
-    [self.verticalScrollView addSubview:self.blurredImageView];
-    [self reloadBluredImage];
+//    [self.verticalScrollView addSubview:self.blurredImageView];
+//    [self reloadBluredImage];
     
     UILabel *label = [[UILabel alloc] init];
     label.textColor = [UIColor whiteColor];
@@ -81,23 +87,38 @@
     label.text = @"hello world";
     label.frame = CGRectMake(10, 0, 300, 50);
     label.top = self.blurredImageView.bottom;
-    [self.verticalScrollView addSubview:label];
-    
+//    [self.verticalScrollView addSubview:label];
+
     [self.view addSubview:self.verticalScrollView];
     
     // 水平滚动view
-    self.horizonScrollView = [[UIScrollView alloc] init];
-    self.horizonScrollView.pagingEnabled = YES;
+    
+    // Setup paging scrolling view
+	CGRect pagingScrollViewFrame = [self frameForHorizonScrollView];
+	self.horizonScrollView = [[UIScrollView alloc] initWithFrame:pagingScrollViewFrame];
+	self.horizonScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.horizonScrollView.pagingEnabled = YES;
+	self.horizonScrollView.delegate = self;
+	self.horizonScrollView.showsHorizontalScrollIndicator = NO;
+	self.horizonScrollView.showsVerticalScrollIndicator = NO;
+//	self.horizonScrollView.backgroundColor = [UIColor blackColor];
+    self.horizonScrollView.contentSize = [self contentSizeForHorizonScrollView];
     self.horizonScrollView.bounces = NO;
-    self.horizonScrollView.frame = self.view.bounds;
-    self.horizonScrollView.height = height;
-    self.horizonScrollView.width = width;
-    self.horizonScrollView.backgroundColor = [UIColor clearColor];
     
-    self.horizonScrollView.delegate = self;
+    NSLog(@"horizon frame:%@ contenSize:%@", NSStringFromCGRect(_horizonScrollView.frame), NSStringFromCGSize(_horizonScrollView.contentSize));
     
-    int numberOfPhoto = [self.delegate numberOfPhotosInPhotoBrowser:self];
-    self.horizonScrollView.contentSize = CGSizeMake(numberOfPhoto * width, height);
+//    self.horizonScrollView = [[UIScrollView alloc] init];
+//    self.horizonScrollView.pagingEnabled = YES;
+//    self.horizonScrollView.bounces = NO;
+//    self.horizonScrollView.frame = self.view.bounds;
+//    self.horizonScrollView.height = height;
+//    self.horizonScrollView.width = width;
+//    self.horizonScrollView.backgroundColor = [UIColor clearColor];
+//    
+//    self.horizonScrollView.delegate = self;
+    
+//    int numberOfPhoto = [self.delegate numberOfPhotosInPhotoBrowser:self];
+//    self.horizonScrollView.contentSize = CGSizeMake(numberOfPhoto * width, height);
     
     for (UIImageView *imageView in self.reuseImageViewArray) {
         [self.horizonScrollView addSubview:imageView];
@@ -105,6 +126,9 @@
     
     [self.verticalScrollView addSubview:self.horizonScrollView];
     
+    [self.verticalScrollView addSubview:self.blurredImageView];
+    [self reloadBluredImage];
+    [self.verticalScrollView addSubview:label];
     
     // 手势绑定
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -112,6 +136,19 @@
     
     [self.verticalScrollView addGestureRecognizer:tapGes];
     
+}
+
+- (CGRect)frameForHorizonScrollView {
+    CGRect frame = self.view.bounds;// [[UIScreen mainScreen] bounds];
+    frame.origin.x -= PADDING;
+    frame.size.width += (2 * PADDING);
+    return CGRectIntegral(frame);
+}
+
+- (CGSize)contentSizeForHorizonScrollView {
+    // We have to use the paging scroll view's bounds to calculate the contentSize, for the same reason outlined above.
+    CGRect bounds = _horizonScrollView.bounds;
+    return CGSizeMake(bounds.size.width * [self.delegate numberOfPhotosInPhotoBrowser:self], bounds.size.height);
 }
 
 - (void)initImageView
@@ -122,8 +159,8 @@
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.width = WIDTH_PAGE;
         imageView.height = HEIGHT_PAGE;
-        imageView.left = prevPoint.x;
-        prevPoint = CGPointMake(imageView.right, 0);
+        imageView.left = prevPoint.x + PADDING;
+        prevPoint = CGPointMake(imageView.right + PADDING, 0);
         
         imageView.image = [self.delegate photoBrowser:self photoAtIndex:i];
         imageView.contentMode = CONTENT_MODEL;
@@ -139,10 +176,12 @@
 {
     @weakify(self);
     self.verticalScrollView.scrollEnabled = NO;
+    _preloading = YES;
     UIImageView *currentDisplayImage = _reuseImageViewArray[_currentReuseIndex];
     [self.blurredImageView setImageToBlur:currentDisplayImage.image blurRadius:10 completionBlock:^() {
         @strongify(self);
         self.verticalScrollView.scrollEnabled = YES;
+        self.preloading = NO;
     }];
 }
 
@@ -211,6 +250,8 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self];
     nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    nav.navigationBar.barStyle = UIBarStyleBlack;
+    nav.navigationBar.tintColor = [UIColor whiteColor];
     
     [viewController presentViewController:nav animated:YES completion:^{
         if (completion) {
@@ -226,7 +267,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         if (self.isHidden) {
-            navBar.top = 20;
+            navBar.top = 0;
         }else{
             navBar.top = -navBar.height;
         }
@@ -244,25 +285,67 @@
         self.blurredImageView.top = offsetY;
         UIImageView *currentImageView = _reuseImageViewArray[_currentReuseIndex];
         currentImageView.top = offsetY;
+        
         CGFloat percent = MIN(position / height, 1.0);
         self.blurredImageView.alpha = percent;
-        currentImageView.alpha = 1-percent;
+//        currentImageView.alpha = 1-percent;
     } else if (scrollView == self.horizonScrollView) {
-//        CGFloat offsetX = scrollView.contentOffset.x;
+        if (_preloading) return;
         
+        
+        // Calculate current page
+//        CGRect visibleBounds = self.horizonScrollView.bounds;
+//        NSInteger index = (NSInteger)(floorf(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds)));
+//        if (index < 0) index = 0;
+//        if (index > [_delegate numberOfPhotosInPhotoBrowser:self] - 1) index = [_delegate numberOfPhotosInPhotoBrowser:self] - 1;
+//        NSLog(@"%d, %f, %f", index, CGRectGetMidX(visibleBounds), CGRectGetWidth(visibleBounds));
+//        _currentPhotoIndex = index;
+//        _currentReuseIndex = index;
+//        NSLog(@"pindex:%d, rindex:%d", _currentPhotoIndex, _currentReuseIndex);
+        
+//        CGFloat offsetX = scrollView.contentOffset.x;
+//        NSInteger index = offsetX / WIDTH_PAGE;
+//        if (index != _currentPhotoIndex) {
+//            _currentPhotoIndex = index;
+//            _currentReuseIndex = index;
+//            
+//            [scrollView setContentOffset:CGPointMake(index * WIDTH_PAGE, 0) animated:YES];
+//            NSLog(@"diff index");
+//        } else {
+//            NSLog(@"same index");
+//        }
+        
+//        NSLog(@"pindex:%d, rindex:%d", _currentPhotoIndex, _currentReuseIndex);
+        
+//        NSUInteger previousCurrentPage = _currentPageIndex;
+//        _currentPageIndex = index;
+//        if (_currentPageIndex != previousCurrentPage) {
+//            [self didStartViewingPageAtIndex:index];
+//        }
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == self.horizonScrollView) {
+        
+        NSLog(@"%@", NSStringFromCGRect(scrollView.bounds));
         CGFloat offsetX = scrollView.contentOffset.x;
+        NSUInteger index = offsetX / WIDTH_PAGE;
+        
+        if (_currentPhotoIndex != index) {
+            UIImageView *currentDisplayImage = _reuseImageViewArray[index];
+            NSLog(@"index1:%d, %@",index, NSStringFromCGRect(currentDisplayImage.frame));
+//            currentDisplayImage.left += PADDING;
+             NSLog(@"index2:%d, %@",index, NSStringFromCGRect(currentDisplayImage.frame));
+        }
         _currentPhotoIndex = offsetX / WIDTH_PAGE;
         _currentReuseIndex = offsetX / WIDTH_PAGE;
         
-        NSLog(@"pindex:%d, rindex:%d", _currentPhotoIndex, _currentReuseIndex);
         
-        [self reloadBluredImage];
+//        NSLog(@"pindex:%d, rindex:%d", _currentPhotoIndex, _currentReuseIndex);
+//
+//        [self reloadBluredImage];
     }
 }
 
